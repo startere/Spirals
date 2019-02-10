@@ -1,0 +1,42 @@
+<html>
+    <img class="pic" src="https://upload.wikimedia.org/wikipedia/en/1/1b/HollywoodCranberries.jpg">
+
+    <script>
+        var centerX = 150;
+        var centerY = 150;
+        
+        var STEPS_PER_ROTATION = 60;
+        var increment = 2 * Math.PI / STEPS_PER_ROTATION;
+        var theta = increment;
+
+        var picStyle = document.getElementsByClassName("pic")[0].style;
+        picStyle.width = 100;
+        picStyle.position = 'absolute';
+
+        moveLine();
+
+        function moveLine(){
+            var newX = centerX + theta * Math.cos(theta);
+            var newY = centerY + theta * Math.sin(theta);
+            
+            picStyle.left = newX;
+            picStyle.top = newY;
+
+            theta += increment;
+
+            if(theta < 40 * Math.PI)
+                setTimeout(moveLine, 50);
+        }
+
+        //GSAP code
+        /*
+            TweenMax.to(['#logo'], 10, {bezier:[
+            {x:"250px",y:"-40px"},
+            {x:"500px",y:"250px"},
+            {x:"250px",y:"500px"},
+            {x:"0px",y:"250px"},
+            {x:"0px",y:"0px"},
+            ],repet:2,ease:Linear.easeNone});
+        */
+    </script>
+</html>

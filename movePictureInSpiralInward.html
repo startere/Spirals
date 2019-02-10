@@ -1,0 +1,48 @@
+<html>
+    <img class="pic" src="https://upload.wikimedia.org/wikipedia/en/1/1b/HollywoodCranberries.jpg">
+
+    <canvas id="myCanvas" width="300" height="300"></canvas>
+
+    <script>
+        var c = document.getElementById("myCanvas");
+        var cxt = c.getContext("2d");
+
+        var dtheta = 0.1;
+        var center = {
+            X: 150,
+            Y: 150,
+        };
+
+        var A = 200;
+
+        var angle_offset = 1;
+        var max_r = 1000;
+
+        var max_theta = A / 2;
+        var currentTheta = max_theta;
+
+        var picStyle = document.getElementsByClassName("pic")[0].style;
+        picStyle.width = 30;
+        picStyle.position = 'absolute';
+
+        moveLine();
+
+        function moveLine(){
+            var r = A / currentTheta;
+
+            var newX = currentTheta * Math.cos(currentTheta + angle_offset) + center.X;
+            var newY = currentTheta * Math.sin(currentTheta + angle_offset) + center.Y;
+
+            picStyle.left = newX;
+            picStyle.top = newY;
+
+            cxt.lineTo(newX, newY);
+            cxt.stroke();
+
+            currentTheta -= dtheta;
+
+            if(r <= max_r)
+                setTimeout(moveLine, 5);
+        }
+    </script>
+</html>
